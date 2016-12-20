@@ -15,6 +15,8 @@ let add = fn(x, y) {
 };
 
 let result = add(five, ten);
+!-/*5;
+5 < 10 > 5;
 	`
 
 	tests := []struct {
@@ -42,7 +44,7 @@ let result = add(five, ten);
 		{token.PARENR, ")"},
 		{token.BRACEL, "{"},
 		{token.NAME, "x"},
-		{token.PLUS, "+"},
+		{token.PLUSMIN, "+"},
 		{token.NAME, "y"},
 		{token.SEMICOLON, ";"},
 		{token.BRACER, "}"},
@@ -56,6 +58,18 @@ let result = add(five, ten);
 		{token.COMMA, ","},
 		{token.NAME, "ten"},
 		{token.PARENR, ")"},
+		{token.SEMICOLON, ";"},
+		{token.FACTORIAL, "!"},
+		{token.PLUSMIN, "-"},
+		{token.SLASH, "/"},
+		{token.STAR, "*"},
+		{token.NUM, "5"},
+		{token.SEMICOLON, ";"},
+		{token.NUM, "5"},
+		{token.RELATIONAL, "<"},
+		{token.NUM, "10"},
+		{token.RELATIONAL, ">"},
+		{token.NUM, "5"},
 		{token.SEMICOLON, ";"},
 		{token.EOF, "\x00"},
 	}

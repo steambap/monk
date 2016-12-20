@@ -15,7 +15,11 @@ const (
 	NAME = "NAME"
 
 	ASSIGN = "="
-	PLUS = "+"
+	PLUSMIN = "+/-"
+	FACTORIAL = "!"
+	STAR = "*"
+	SLASH = "/"
+	RELATIONAL = "</>"
 	
 	COMMA = ","
 	SEMICOLON = ";"
