@@ -3,10 +3,10 @@ package lexer
 import "monk/token"
 
 type Lexer struct {
-	input string
-	position int
+	input        string
+	position     int
 	readPosition int
-	ch byte
+	ch           byte
 }
 
 // Lexer constructor
@@ -36,52 +36,52 @@ func (l *Lexer) NextToken() token.Token {
 	ch := l.ch
 
 	switch ch {
-		case '=':
-			tokType = token.ASSIGN
-		case ';':
-			tokType = token.SEMICOLON
-		case '(':
-			tokType = token.PARENL
-		case ')':
-			tokType = token.PARENR
-		case ',':
-			tokType = token.COMMA
-		case '+', '-':
-			tokType = token.PLUSMIN
-		case '!':
-			tokType = token.FACTORIAL
-		case '/':
-			tokType = token.SLASH
-		case '*':
-			tokType = token.STAR
-		case '<', '>':
-			tokType = token.RELATIONAL
-		case '{':
-			tokType = token.BRACEL
-		case '}':
-			tokType = token.BRACER
-		case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
-			tokType = token.NUM
-			literal := l.readNumber()
+	case '=':
+		tokType = token.ASSIGN
+	case ';':
+		tokType = token.SEMICOLON
+	case '(':
+		tokType = token.PARENL
+	case ')':
+		tokType = token.PARENR
+	case ',':
+		tokType = token.COMMA
+	case '+', '-':
+		tokType = token.PLUSMIN
+	case '!':
+		tokType = token.FACTORIAL
+	case '/':
+		tokType = token.SLASH
+	case '*':
+		tokType = token.STAR
+	case '<', '>':
+		tokType = token.RELATIONAL
+	case '{':
+		tokType = token.BRACEL
+	case '}':
+		tokType = token.BRACER
+	case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
+		tokType = token.NUM
+		literal := l.readNumber()
+
+		return newToken(tokType, literal)
+	case 0:
+		tokType = token.EOF
+
+	default:
+		if isWord(ch) {
+			literal := l.readWord()
+			tokType = token.LookupName(literal)
 
 			return newToken(tokType, literal)
-		case 0:
-			tokType = token.EOF
-
-		default:
-			if isWord(ch) {
-				literal := l.readWord()
-				tokType = token.LookupName(literal)
-
-				return newToken(tokType, literal)
-			} else {
-				tokType = token.ILLEGAL
-			}
+		} else {
+			tokType = token.ILLEGAL
+		}
 	}
 
 	l.readChar()
 
-	return newToken(tokType, string(ch));
+	return newToken(tokType, string(ch))
 }
 
 func (l *Lexer) readWord() string {

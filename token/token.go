@@ -3,25 +3,25 @@ package token
 type TokenType string
 
 type Token struct {
-	Type TokenType
+	Type    TokenType
 	Literal string
 }
 
 const (
 	ILLEGAL = "ILLEGAL"
-	EOF = "EOF"
+	EOF     = "EOF"
 
-	NUM = "NUM"
+	NUM  = "NUM"
 	NAME = "NAME"
 
-	ASSIGN = "="
-	PLUSMIN = "+/-"
-	FACTORIAL = "!"
-	STAR = "*"
-	SLASH = "/"
+	ASSIGN     = "="
+	PLUSMIN    = "+/-"
+	FACTORIAL  = "!"
+	STAR       = "*"
+	SLASH      = "/"
 	RELATIONAL = "</>"
-	
-	COMMA = ","
+
+	COMMA     = ","
 	SEMICOLON = ";"
 
 	PARENL = "("
@@ -30,11 +30,11 @@ const (
 	BRACER = "}"
 
 	FUNCTION = "FUNCTION"
-	LET = "LET"
+	LET      = "LET"
 )
 
-var keywords = map[string]TokenType {
-	"fn": FUNCTION,
+var keywords = map[string]TokenType{
+	"fn":  FUNCTION,
 	"let": LET,
 }
 
