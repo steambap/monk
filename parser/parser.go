@@ -12,11 +12,11 @@ type Parser struct {
 	l         *lexer.Lexer
 	curToken  token.Token
 	peekToken token.Token
-	errors     []String
+	errors    []string
 }
 
 func New(l *lexer.Lexer) *Parser {
-	p := &Parser{l: l, errors: []String{}}
+	p := &Parser{l: l, errors: []string{}}
 
 	// read 2 tokens
 	p.nextToken()
@@ -25,7 +25,7 @@ func New(l *lexer.Lexer) *Parser {
 	return p
 }
 
-func (p *Parser) Errors() {
+func (p *Parser) Errors() []string {
 	return p.errors
 }
 func (p *Parser) peekErrors(t token.TokenType) {
@@ -48,19 +48,21 @@ func (p *Parser) ParseProgram() *ast.Program {
 		}
 		p.nextToken()
 	}
+
+	return program
 }
 
-func (p *Parser) parseStatement() *ast.Statement {
+func (p *Parser) parseStatement() ast.Statement {
 	switch p.curToken.Type {
-		case token.LET:
-			return p.parseLetStatement()
-		default:
-			return nil
+	case token.LET:
+		return p.parseLetStatement()
+	default:
+		return nil
 	}
 }
 
-func (p *Parser) parseLetStatement() *ast.Statement {
-	stmt := &ast.Statement{Token: p.curToken}
+func (p *Parser) parseLetStatement() *ast.LetStatement {
+	stmt := &ast.LetStatement{Token: p.curToken}
 
 	if !p.expectPeekToken(token.NAME) {
 		return nil
